@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping(value = "/api/post", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class PostController {
     private final GetService getService;
     private final PostService postService;
@@ -38,7 +38,7 @@ public class PostController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("")
+    @GetMapping("/post")
     @ResponseBody
     private ResponseEntity<?> getPosts (@RequestParam(defaultValue="0") Integer offset,
                                         @RequestParam(defaultValue="10") Integer limit,
@@ -47,14 +47,14 @@ public class PostController {
         return getService.getPosts (offset, limit, mode);
     }
 
-    @GetMapping("/{ID:\\d+}")
+    @GetMapping("/post/{ID:\\d+}")
     //@RequestMapping(value = "/{ID: \\d+}", produces = "application/json", method = RequestMethod.GET)
     private ResponseEntity<?> getPostById (@PathVariable("ID") Integer ID) {
         System.out.println("Method getPostById activated. ID requested: " + ID);
         return getService.getPostById(ID);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/post/search")
     private ResponseEntity<?> getPostsBySearch (@RequestParam(defaultValue="0") Integer offset,
                                                 @RequestParam(defaultValue="5") Integer limit,
                                                 @RequestParam String query) {
@@ -62,7 +62,7 @@ public class PostController {
         return getService.getPostsBySearch(offset, limit, query);
     }
 
-    @GetMapping("/byDate")
+    @GetMapping("/post/byDate")
     private ResponseEntity<?> getPostsByDate (@RequestParam(defaultValue="0") Integer offset,
                                               @RequestParam(defaultValue="5") Integer limit,
                                               @RequestParam  String date){
@@ -70,7 +70,7 @@ public class PostController {
         return getService.getPostsByDate(offset, limit, date);
     }
 
-    @GetMapping("/byTag")
+    @GetMapping("/post/byTag")
     private ResponseEntity<?> getPostsByTag(@RequestParam(defaultValue="0") Integer offset,
                                             @RequestParam(defaultValue="5") Integer limit,
                                             @RequestParam String tag){
@@ -78,7 +78,7 @@ public class PostController {
         return getService.getPostsByTag(offset, limit, tag);
     }
 
-    @GetMapping("/moderation")
+    @GetMapping("/post/moderation")
     private ResponseEntity<?> getPostsForModeration(@RequestParam(defaultValue="0") Integer offset,
                                                     @RequestParam(defaultValue="3") Integer limit,
                                                     @RequestParam(defaultValue="NEW") String status) {
@@ -86,21 +86,21 @@ public class PostController {
         return getService.getPostsForModeration(offset, limit, status);
     }
 
-    @GetMapping("/my")
+    @GetMapping("/post/my")
     private ResponseEntity<?> getMyPosts (@RequestParam(defaultValue="0") Integer offset,
                                           @RequestParam(defaultValue="5") Integer limit) {
         System.out.println("Method getMyPosts activated.");
         return getService.getMyPosts(offset, limit);
     }
 
-    @PostMapping("/like")
+    @PostMapping("/post/like")
     private ResponseEntity<?> postLike (@RequestBody LikeRequest likeRequest) {
         System.out.println("Method postLike activated");
         System.out.println(likeRequest);
         return postService.postLikeDislike(likeRequest, 1);
     }
 
-    @PostMapping("/dislike")
+    @PostMapping("/post/dislike")
     private ResponseEntity<?> postDislike (@RequestBody LikeRequest likeRequest)
     {
         System.out.println("Method postDislike activated");
@@ -108,16 +108,22 @@ public class PostController {
         return postService.postLikeDislike(likeRequest, -1);
     }
 
-    @PostMapping("")
+    @PostMapping("/post")
     private ResponseEntity<?> postPost (@RequestBody PostRequest postRequest) {
         System.out.println("Method postPost is activated");
         return postService.postPost(postRequest);
     }
 
-    @PutMapping(value = "/{ID:\\d+}")
+    @PutMapping(value = "/post/{ID:\\d+}")
     public ResponseEntity<?> putPost (@PathVariable(value = "ID") int ID, @RequestBody PutPostRequest putPostRequest){
         System.out.println("Method putPost is activated");
         return postService.putPost(ID, putPostRequest);
+    }
+
+    @PostMapping("/image")
+    private ResponseEntity<?> postImage (@RequestBody ImageRequest imageRequest) {
+        System.out.println("Method postImage is activated");
+        return postService.postImage(imageRequest);
     }
 }
 

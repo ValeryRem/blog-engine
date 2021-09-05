@@ -144,7 +144,7 @@ public class UserService {
 //        }
 //    }
 
-    private File getOutputFile (MultipartFile photo) throws IOException {
+    public File getOutputFile (MultipartFile photo) throws IOException {
         String targetFolder = "upload/";
         String hashCode = String.valueOf(Math.abs(targetFolder.hashCode()));
         String folder1 = hashCode.substring(0, hashCode.length() / 3);

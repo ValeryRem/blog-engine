@@ -9,7 +9,11 @@ import org.jsoup.Jsoup;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -30,10 +34,12 @@ public class PostService {
     private final Tag2PostRepository tag2PostRepository;
     private final CommentRepository commentRepository;
     private final GlobalSettingsRepository globalSettingsRepository;
+    private final UserService userService;
 
     public PostService(UserRepository userRepository, PostRepository postRepository, AuthService authService,
                        PostVoteRepository postVoteRepository, TagRepository tagRepository, Tag2PostRepository tag2PostRepository,
-                       CommentRepository commentRepository, GlobalSettingsRepository globalSettingsRepository) {
+                       CommentRepository commentRepository, GlobalSettingsRepository globalSettingsRepository,
+                       UserService userService) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.authService = authService;
@@ -42,6 +48,7 @@ public class PostService {
         this.tag2PostRepository = tag2PostRepository;
         this.commentRepository = commentRepository;
         this.globalSettingsRepository = globalSettingsRepository;
+        this.userService = userService;
     }
 
     public ResponseEntity<?> postApiModeration(Integer id, String decision) {
@@ -159,6 +166,40 @@ public class PostService {
         postRepository.save(post);
         processTags(postRequest.getTags(), post, postRequest.getTitle(), postRequest.getText());
         return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> postImage(ImageRequest imageRequest) {
+        Map<String, Object> errors = new LinkedHashMap<>();
+        Map<String, Object> responseMap = new LinkedHashMap<>();
+
+        if (!authService.isUserAuthorized()) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        MultipartFile photo = imageRequest.getPhoto();
+        if( photo!= null){
+            int MAX_IMAGE_SIZE = 3_000_000;
+            try {
+                if (photo.getBytes().length <= MAX_IMAGE_SIZE) {
+                        File convertedFile = userService.getOutputFile(photo); //картинка форматируется и записывается в папку upload
+                        String photoDestination = StringUtils.cleanPath(convertedFile.getPath());//getImageAddress(photo);//
+                        System.out.println("imageAddress: " + photoDestination);
+                        if(!photoDestination.endsWith("jpg") || !photoDestination.endsWith("png")){
+                            errors.put( "image", "Photo of wrong format!");
+                            responseMap.put("result", false);
+                            responseMap.put("errors", errors);
+                            return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
+                        }
+                } else {
+                    errors.put( "image", "Размер файла превышает допустимый размер");
+                    responseMap.put("result", false);
+                    responseMap.put("errors", errors);
+                    return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return new ResponseEntity<>(photo, HttpStatus.OK);
     }
 
     private void processTags(List<String> tags, Post post, String title, String text) {
