@@ -78,11 +78,11 @@ public class GeneralController {
         return postService.postApiModeration(postModerationRequest.getPost_id(), postModerationRequest.getDecision());
     }
 
-    @PostMapping(value = "/image", consumes = {"multipart/form-data"})// MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody ResponseEntity<?> postApiImage(@RequestBody MultipartFile image) throws IOException {
-        System.out.println("Method postApiImage is activated.");
-        return userService.postApiImage(image);
-    }
+//    @PostMapping(value = "/image", consumes = {"multipart/form-data"})// MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public @ResponseBody ResponseEntity<?> postApiImage(@RequestBody MultipartFile image) throws IOException {
+//        System.out.println("Method postApiImage is activated.");
+//        return userService.postApiImage(image);
+//    }
 
     @PostMapping("/comment")
     private ResponseEntity<?> postComment (@RequestBody CommentRequest commentRequest){

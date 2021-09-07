@@ -1,10 +1,8 @@
 package main.service;
 
-import main.requests.ProfileRequest;
 import main.response.ResultResponse;
 import main.entity.User;
 import main.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -29,10 +27,10 @@ public class UserService {
 
     private final ResultResponse resultResponse = new ResultResponse(false);
 
-    public ResponseEntity<?> postApiImage(MultipartFile image) throws IOException {
+    public ResponseEntity<?> postAvatar(MultipartFile image) throws IOException {
         User user = userRepository.getOne(authService.getUserId());
         if (authService.isUserAuthorized()) {
-            String imageAddress = StringUtils.cleanPath(getOutputFile(image).getAbsolutePath());//.getPath();
+            String imageAddress = StringUtils.cleanPath(saveImage(image).getAbsolutePath());//.getPath();
             System.out.println(imageAddress); // test
             user.setPhoto(imageAddress);
             userRepository.save(user);
@@ -51,12 +49,12 @@ public class UserService {
         User currentUser = userRepository.getOne(authService.getUserId());
         Map<String, Object> errors = new LinkedHashMap<>();
         if(photo != null) {
-            int MAX_IMAGE_SIZE = 5_000_000;
+            int MAX_IMAGE_SIZE = 3_000_000;
             if (photo.getBytes().length <= MAX_IMAGE_SIZE) {
                 if (removePhoto.equals("1")) {
                     currentUser.setPhoto("");
                 } else {
-                    File convertFile = getOutputFile(photo); //аватара форматируется и записывается в папку upload
+                    File convertFile = saveImage(photo); //аватара форматируется и записывается в папку upload
                     String photoDestination = StringUtils.cleanPath(convertFile.getPath());//getImageAddress(photo);//
                     currentUser.setPhoto("/" + photoDestination);
                     System.out.println("avatarAddress: " + photoDestination);//((ImageOutputStream) image).readLine());
@@ -144,7 +142,7 @@ public class UserService {
 //        }
 //    }
 
-    public File getOutputFile (MultipartFile photo) throws IOException {
+    public File saveImage(MultipartFile photo) throws IOException {
         String targetFolder = "upload/";
         String hashCode = String.valueOf(Math.abs(targetFolder.hashCode()));
         String folder1 = hashCode.substring(0, hashCode.length() / 3);

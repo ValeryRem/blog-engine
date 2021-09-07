@@ -168,38 +168,36 @@ public class PostService {
         return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> postImage(ImageRequest imageRequest) {
+    public ResponseEntity<?> postImage(MultipartFile photo) throws IOException {
         Map<String, Object> errors = new LinkedHashMap<>();
         Map<String, Object> responseMap = new LinkedHashMap<>();
-
         if (!authService.isUserAuthorized()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        MultipartFile photo = imageRequest.getPhoto();
-        if( photo!= null){
-            int MAX_IMAGE_SIZE = 3_000_000;
-            try {
-                if (photo.getBytes().length <= MAX_IMAGE_SIZE) {
-                        File convertedFile = userService.getOutputFile(photo); //картинка форматируется и записывается в папку upload
-                        String photoDestination = StringUtils.cleanPath(convertedFile.getPath());//getImageAddress(photo);//
-                        System.out.println("imageAddress: " + photoDestination);
-                        if(!photoDestination.endsWith("jpg") || !photoDestination.endsWith("png")){
-                            errors.put( "image", "Photo of wrong format!");
-                            responseMap.put("result", false);
-                            responseMap.put("errors", errors);
-                            return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
-                        }
-                } else {
-                    errors.put( "image", "Размер файла превышает допустимый размер");
+        if (photo != null) {
+            int MAX_IMAGE_SIZE = 1_000_000;
+            System.out.println("Method postImage is activated & photo != null."); // for test
+            if (photo.getBytes().length <= MAX_IMAGE_SIZE) {
+                File convertedFile = userService.saveImage(photo); //картинка форматируется и записывается в папку upload
+                String photoDestination = StringUtils.cleanPath(convertedFile.getPath());
+                System.out.println("imageAddress: " + photoDestination);// for test
+                if (!photoDestination.endsWith("jpg") && !photoDestination.endsWith("png")) {
+                    errors.put("image", "Wrong format of the photo!");
                     responseMap.put("result", false);
                     responseMap.put("errors", errors);
                     return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                return new ResponseEntity<>(photoDestination, HttpStatus.OK);
+            } else {
+                errors.put("image", "Размер файла превышает допустимый размер");
+                responseMap.put("result", false);
+                responseMap.put("errors", errors);
+                return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
             }
+        } else {
+            System.out.println("Method postImage is activated but photo = null."); // for test
+            return new ResponseEntity<>("upload/226/43/78/0_Fox.jpg", HttpStatus.OK); // заглушка!
         }
-        return new ResponseEntity<>(photo, HttpStatus.OK);
     }
 
     private void processTags(List<String> tags, Post post, String title, String text) {

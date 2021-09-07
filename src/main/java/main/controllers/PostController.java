@@ -12,7 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -40,7 +43,7 @@ public class PostController {
 
     @GetMapping("/post")
     @ResponseBody
-    private ResponseEntity<?> getPosts (@RequestParam(defaultValue="0") Integer offset,
+    public ResponseEntity<?> getPosts (@RequestParam(defaultValue="0") Integer offset,
                                         @RequestParam(defaultValue="10") Integer limit,
                                         @RequestParam String mode){
         System.out.println("Method getPosts activated.");
@@ -49,13 +52,13 @@ public class PostController {
 
     @GetMapping("/post/{ID:\\d+}")
     //@RequestMapping(value = "/{ID: \\d+}", produces = "application/json", method = RequestMethod.GET)
-    private ResponseEntity<?> getPostById (@PathVariable("ID") Integer ID) {
+    public ResponseEntity<?> getPostById (@PathVariable("ID") Integer ID) {
         System.out.println("Method getPostById activated. ID requested: " + ID);
         return getService.getPostById(ID);
     }
 
     @GetMapping("/post/search")
-    private ResponseEntity<?> getPostsBySearch (@RequestParam(defaultValue="0") Integer offset,
+    public ResponseEntity<?> getPostsBySearch (@RequestParam(defaultValue="0") Integer offset,
                                                 @RequestParam(defaultValue="5") Integer limit,
                                                 @RequestParam String query) {
         System.out.println("Method getPostsBySearch activated");
@@ -63,7 +66,7 @@ public class PostController {
     }
 
     @GetMapping("/post/byDate")
-    private ResponseEntity<?> getPostsByDate (@RequestParam(defaultValue="0") Integer offset,
+    public ResponseEntity<?> getPostsByDate (@RequestParam(defaultValue="0") Integer offset,
                                               @RequestParam(defaultValue="5") Integer limit,
                                               @RequestParam  String date){
         System.out.println("Method getPostsByDate activated by the date: " + date );
@@ -71,7 +74,7 @@ public class PostController {
     }
 
     @GetMapping("/post/byTag")
-    private ResponseEntity<?> getPostsByTag(@RequestParam(defaultValue="0") Integer offset,
+    public ResponseEntity<?> getPostsByTag(@RequestParam(defaultValue="0") Integer offset,
                                             @RequestParam(defaultValue="5") Integer limit,
                                             @RequestParam String tag){
         System.out.println("Method getPostsByTag uses tag name:" + tag);
@@ -79,7 +82,7 @@ public class PostController {
     }
 
     @GetMapping("/post/moderation")
-    private ResponseEntity<?> getPostsForModeration(@RequestParam(defaultValue="0") Integer offset,
+    public ResponseEntity<?> getPostsForModeration(@RequestParam(defaultValue="0") Integer offset,
                                                     @RequestParam(defaultValue="3") Integer limit,
                                                     @RequestParam(defaultValue="NEW") String status) {
         System.out.println("Method getPostsForModeration activated.");
@@ -87,21 +90,21 @@ public class PostController {
     }
 
     @GetMapping("/post/my")
-    private ResponseEntity<?> getMyPosts (@RequestParam(defaultValue="0") Integer offset,
+    public ResponseEntity<?> getMyPosts (@RequestParam(defaultValue="0") Integer offset,
                                           @RequestParam(defaultValue="5") Integer limit) {
         System.out.println("Method getMyPosts activated.");
         return getService.getMyPosts(offset, limit);
     }
 
     @PostMapping("/post/like")
-    private ResponseEntity<?> postLike (@RequestBody LikeRequest likeRequest) {
+    public ResponseEntity<?> postLike (@RequestBody LikeRequest likeRequest) {
         System.out.println("Method postLike activated");
         System.out.println(likeRequest);
         return postService.postLikeDislike(likeRequest, 1);
     }
 
     @PostMapping("/post/dislike")
-    private ResponseEntity<?> postDislike (@RequestBody LikeRequest likeRequest)
+    public ResponseEntity<?> postDislike (@RequestBody LikeRequest likeRequest)
     {
         System.out.println("Method postDislike activated");
         System.out.println(likeRequest);
@@ -109,7 +112,7 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    private ResponseEntity<?> postPost (@RequestBody PostRequest postRequest) {
+    public ResponseEntity<?> postPost (@RequestBody PostRequest postRequest) {
         System.out.println("Method postPost is activated");
         return postService.postPost(postRequest);
     }
@@ -120,10 +123,9 @@ public class PostController {
         return postService.putPost(ID, putPostRequest);
     }
 
-    @PostMapping("/image")
-    private ResponseEntity<?> postImage (@RequestBody ImageRequest imageRequest) {
-        System.out.println("Method postImage is activated");
-        return postService.postImage(imageRequest);
+    @PostMapping(value = "/image", consumes = {"multipart/form-data"})
+    public @ResponseBody ResponseEntity<?> postImage (@RequestBody MultipartFile photo) throws IOException {
+        return postService.postImage(photo);
     }
 }
 
