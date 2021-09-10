@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -168,35 +170,34 @@ public class PostService {
         return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> postImage(MultipartFile photo) throws IOException {
+    public ResponseEntity<?> postImage(MultipartFile image) throws IOException {
         Map<String, Object> errors = new LinkedHashMap<>();
         Map<String, Object> responseMap = new LinkedHashMap<>();
         if (!authService.isUserAuthorized()) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        if (photo != null) {
-            int MAX_IMAGE_SIZE = 1_000_000;
-            System.out.println("Method postImage is activated & photo != null."); // for test
-            if (photo.getBytes().length <= MAX_IMAGE_SIZE) {
-                File convertedFile = userService.saveImage(photo); //картинка форматируется и записывается в папку upload
-                String photoDestination = StringUtils.cleanPath(convertedFile.getPath());
-                System.out.println("imageAddress: " + photoDestination);// for test
-                if (!photoDestination.endsWith("jpg") && !photoDestination.endsWith("png")) {
-                    errors.put("image", "Wrong format of the photo!");
-                    responseMap.put("result", false);
-                    responseMap.put("errors", errors);
-                    return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
-                }
-                return new ResponseEntity<>(photoDestination, HttpStatus.OK);
-            } else {
-                errors.put("image", "Размер файла превышает допустимый размер");
+        if (image == null) {
+            System.out.println("Method postImage is activated but photo = null."); // for test
+            return new ResponseEntity<>("/upload/226/43/78/0_Fox.jpg", HttpStatus.OK); // заглушка!
+        }
+        int MAX_IMAGE_SIZE = 1_000_000;
+        System.out.println("Method postImage is activated & photo != null."); // for test
+        if (image.getSize() <= MAX_IMAGE_SIZE) {
+            File convertedFile = userService.saveImage(image); //картинка форматируется и записывается в папку upload
+            String photoDestination = StringUtils.cleanPath(convertedFile.getPath());
+            System.out.println("imageAddress: " + photoDestination);// for test
+            if (!photoDestination.endsWith("jpg") && !photoDestination.endsWith("png")) {
+                errors.put("image", "Wrong format of the photo!");
                 responseMap.put("result", false);
                 responseMap.put("errors", errors);
                 return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
             }
+            return new ResponseEntity<>("/" + photoDestination, HttpStatus.OK);
         } else {
-            System.out.println("Method postImage is activated but photo = null."); // for test
-            return new ResponseEntity<>("upload/226/43/78/0_Fox.jpg", HttpStatus.OK); // заглушка!
+            errors.put("image", "Размер файла превышает допустимый размер");
+            responseMap.put("result", false);
+            responseMap.put("errors", errors);
+            return new ResponseEntity<>(responseMap, HttpStatus.BAD_REQUEST);
         }
     }
 

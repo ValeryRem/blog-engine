@@ -23,7 +23,7 @@ public class ProfileController {
 
     @PostMapping(value = "/my", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateProfile(@Valid @RequestBody ProfileRequest request) throws IOException {
-        System.out.println("updateProfile method is active " + request.getEmail()); // для теста только возвращаем ответы и пишем в консоль
+        System.out.println("updateProfile method is active." + request.getEmail()); // для теста только возвращаем ответы и пишем в консоль
         return userService.getPostProfileMy(request.getPhoto(), request.getEmail(), request.getName(),
                 request.getPassword(), request.getRemovePhoto());
     }
@@ -36,7 +36,7 @@ public class ProfileController {
             @RequestParam("email") String email,
             @RequestParam(name = "password", required = false) String password
     ) throws IOException {
-        System.out.println("updateProfile with Photo is active " + photo.getOriginalFilename());
+        System.out.println("updateProfile with Photo is active." + photo.getOriginalFilename());
         return userService.getPostProfileMy(photo, email, name, password, removePhoto);
     }
 }

@@ -117,15 +117,15 @@ public class PostController {
         return postService.postPost(postRequest);
     }
 
-    @PutMapping(value = "/post/{ID:\\d+}")
+    @PutMapping("/post/{ID:\\d+}")
     public ResponseEntity<?> putPost (@PathVariable(value = "ID") int ID, @RequestBody PutPostRequest putPostRequest){
         System.out.println("Method putPost is activated");
         return postService.putPost(ID, putPostRequest);
     }
 
-    @PostMapping(value = "/image", consumes = {"multipart/form-data"})
-    public @ResponseBody ResponseEntity<?> postImage (@RequestBody MultipartFile photo) throws IOException {
-        return postService.postImage(photo);
+    @PostMapping (value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)//{"multipart/form-data"})
+    public @ResponseBody ResponseEntity<?> postImage (@RequestBody MultipartFile image) throws IOException {
+        return postService.postImage(image);
     }
 }
 
