@@ -170,8 +170,8 @@ public class UserService {
         photo.transferTo(Path.of(finalDestination));
         File destFile = new File(finalDestination);// Windows separators ("\") are replaced by simple slashes.
         Image image = ImageIO.read(photo.getInputStream());
-        int HEIGHT_MAX = 100; // хотя требуется выполнять обрезку и изменение размера фотографии до 36х36 пикселей.
-        int WIDTH_MAX = 100;
+        int HEIGHT_MAX = 50; // хотя требуется выполнять обрезку и изменение размера фотографии до 36х36 пикселей.
+        int WIDTH_MAX = 50;
         BufferedImage tempPNG = resizeImage(image, WIDTH_MAX, HEIGHT_MAX);
         ImageIO.write(tempPNG, "png", destFile);
         return destFile;

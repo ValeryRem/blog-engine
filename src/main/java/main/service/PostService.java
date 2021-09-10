@@ -151,8 +151,8 @@ public class PostService {
         post.setUserId(userId);
         post.setViewCount(0);
         post.setTitle(postRequest.getTitle());
-        post.setText(cleanedOffHtml(postRequest.getText()));
-
+        post.setText(postRequest.getText());
+//        post.setText(cleanedOffHtml(postRequest.getText()));
         if (globalSettingsRepository.findAll().stream().findAny().orElse(new GlobalSettings())
                 .isPostPremoderation()) {
             if (!user.getIsModerator() || postRequest.getActive() != 1) { // if the user is not moderator
