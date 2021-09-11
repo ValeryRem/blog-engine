@@ -80,8 +80,7 @@ public class AuthService{
     }
 
     public void registerSession(Integer userId) {
-//        ZoneId zoneId = ZoneId.systemDefault();//.of("UTC"); //
-        long epochSeconds = Instant.now().getEpochSecond();//LocalDateTime.now().atZone(zoneId).toEpochSecond();//
+        long epochSeconds = Instant.now().getEpochSecond();
         String sessionName = httpSession.getId();
         Timestamp timestamp = new Timestamp(epochSeconds*1000);
         Session session = new Session(sessionName, timestamp, userId);

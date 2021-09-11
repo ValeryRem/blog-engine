@@ -51,7 +51,6 @@ public class PostController {
     }
 
     @GetMapping("/post/{ID:\\d+}")
-    //@RequestMapping(value = "/{ID: \\d+}", produces = "application/json", method = RequestMethod.GET)
     public ResponseEntity<?> getPostById (@PathVariable("ID") Integer ID) {
         System.out.println("Method getPostById activated. ID requested: " + ID);
         return getService.getPostById(ID);
@@ -123,7 +122,7 @@ public class PostController {
         return postService.putPost(ID, putPostRequest);
     }
 
-    @PostMapping (value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)//{"multipart/form-data"})
+    @PostMapping (value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody ResponseEntity<?> postImage (@RequestBody MultipartFile image) throws IOException {
         return postService.postImage(image);
     }

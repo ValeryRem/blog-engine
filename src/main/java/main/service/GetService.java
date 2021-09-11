@@ -101,7 +101,7 @@ public class GetService {
                 posts = postRepository.getRecentPosts(pageRequest);
                 break;
         }
-        return posts.toList();//.stream().filter(p -> p.isActive() == 1).collect(Collectors.toList());
+        return posts.toList();
     }
 
     public ResponseEntity<?> getPostsBySearch(Integer offset, Integer limit, String query) {
@@ -484,7 +484,6 @@ public class GetService {
         Map<String, Integer> posts = new LinkedHashMap<>();
         int postCountAtDate;
         List<Post> postsList = postRepository.findAllActivePosts().stream()
-//                .filter(p -> p.isActive() == 1 && p.getModerationStatus().equals(ModerationStatus.ACCEPTED))
                 .sorted(Comparator.comparing(Post::getTimestamp))
                 .collect(Collectors.toList());
         years = postsList.stream()

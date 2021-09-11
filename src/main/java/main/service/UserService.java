@@ -30,13 +30,12 @@ public class UserService {
     public ResponseEntity<?> postAvatar(MultipartFile image) throws IOException {
         User user = userRepository.getOne(authService.getUserId());
         if (authService.isUserAuthorized()) {
-            String imageAddress = StringUtils.cleanPath(saveImage(image).getAbsolutePath());//.getPath();
-            System.out.println(imageAddress); // test
+            String imageAddress = StringUtils.cleanPath(saveImage(image).getAbsolutePath());
             user.setPhoto(imageAddress);
             userRepository.save(user);
             return new ResponseEntity<>(imageAddress, HttpStatus.OK);
         } else {
-            return ResponseEntity.ok(new ResultResponse(false));//("User UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.ok(new ResultResponse(false));
         }
     }
 
@@ -55,9 +54,9 @@ public class UserService {
                     currentUser.setPhoto("");
                 } else {
                     File convertFile = saveImage(photo); //аватара форматируется и записывается в папку upload
-                    String photoDestination = StringUtils.cleanPath(convertFile.getPath());//getImageAddress(photo);//
+                    String photoDestination = StringUtils.cleanPath(convertFile.getPath());
                     currentUser.setPhoto("/" + photoDestination);
-                    System.out.println("avatarAddress: " + photoDestination);//((ImageOutputStream) image).readLine());
+                    System.out.println("avatarAddress: " + photoDestination);
                 }
             } else {
                 result = false;
@@ -90,57 +89,6 @@ public class UserService {
             return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
         }
     }
-
-
-//    public ResponseEntity<?> getPostProfileMy(ProfileRequest profileRequest) throws IOException {
-//        if (!authService.isUserAuthorized()) {
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//        }
-//        boolean result = true;
-//        User currentUser = userRepository.getOne(authService.getUserId());
-//        Map<String, Object> errors = new LinkedHashMap<>();
-//        if(profileRequest.getPhoto() != null) {
-//            int MAX_IMAGE_SIZE = 5_000_000;
-//            if (profileRequest.getPhoto().getBytes().length <= MAX_IMAGE_SIZE) {
-//                if (profileRequest.getRemovePhoto().equals("1")) {
-//                    currentUser.setPhoto("");
-//                } else {
-//                    File convertFile = getOutputFile(profileRequest.getPhoto()); //аватара форматируется и записывается в папку upload
-//                    String photoDestination = StringUtils.cleanPath(convertFile.getPath());//getImageAddress(photo);//
-//                    currentUser.setPhoto("/" + photoDestination);
-//                    System.out.println("avatarAddress: " + photoDestination);//((ImageOutputStream) image).readLine());
-//                }
-//            } else {
-//                result = false;
-//                errors.put("photo", "Фото слишком большое, нужно не более 5 Мб.");
-//            }
-//        }
-//        if (profileRequest.getPassword() != null) {
-//            int PW_MIN_LENGTH = 6;
-//            int PW_MAX_LENGTH = 30;
-//            if (profileRequest.getPassword().length() < PW_MIN_LENGTH && profileRequest.getPassword().length() > PW_MAX_LENGTH) {
-//                result = false;
-//                errors.put("password", "Длина пароля с ошибкой");
-//            }
-//        }
-//        if (!profileRequest.getName().matches("[a-zA-Z]*") || profileRequest.getName().length() > 100 || profileRequest.getName().length() < 2) {
-//            result = false;
-//            errors.put("name", "Имя указано неверно.");
-//        }
-//        if (!result) {
-//            return new ResponseEntity<>(resultResponse, HttpStatus.BAD_REQUEST);
-//        } else {
-//            currentUser.setName(profileRequest.getName());
-//            if(profileRequest.getEmail() != null && !currentUser.getEmail().equals(profileRequest.getEmail())) {
-//                currentUser.setEmail(profileRequest.getEmail());
-//            }
-//            if(profileRequest.getPassword() != null) {
-//                currentUser.setPassword(profileRequest.getPassword());
-//            }
-//            userRepository.save(currentUser);
-//            return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
-//        }
-//    }
 
     public File saveImage(MultipartFile photo) throws IOException {
         String targetFolder = "upload/";
@@ -181,10 +129,6 @@ public class UserService {
         final BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         final Graphics2D graphics2D = bufferedImage.createGraphics();
         graphics2D.setComposite(AlphaComposite.Src);
-        //below three lines are for RenderingHints for better image quality at cost of higher processing time
-//        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-//        graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-//        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.drawImage(image, 0, 0, width, height, null);
         graphics2D.dispose();
         return bufferedImage;

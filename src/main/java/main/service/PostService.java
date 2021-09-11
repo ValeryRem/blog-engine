@@ -79,7 +79,6 @@ public class PostService {
         return ResponseEntity.ok(new ResultResponse(true));
     }
 
-
     public ResponseEntity<?> postLikeDislike(LikeRequest likeRequest, Integer value) {
         PostVote postVote;
         int userId = authService.getUserId();
@@ -177,15 +176,12 @@ public class PostService {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         if (image == null) {
-            System.out.println("Method postImage is activated but photo = null."); // for test
             return new ResponseEntity<>("/upload/226/43/78/0_Fox.jpg", HttpStatus.OK); // заглушка!
         }
         int MAX_IMAGE_SIZE = 1_000_000;
-        System.out.println("Method postImage is activated & photo != null."); // for test
         if (image.getSize() <= MAX_IMAGE_SIZE) {
             File convertedFile = userService.saveImage(image); //картинка форматируется и записывается в папку upload
             String photoDestination = StringUtils.cleanPath(convertedFile.getPath());
-            System.out.println("imageAddress: " + photoDestination);// for test
             if (!photoDestination.endsWith("jpg") && !photoDestination.endsWith("png")) {
                 errors.put("image", "Wrong format of the photo!");
                 responseMap.put("result", false);
@@ -236,7 +232,7 @@ public class PostService {
         }
         Post post = postOptional.get();
         User user = userRepository.getOne(post.getUserId());
-        post.setText(cleanedOffHtml(putPostRequest.getText()));
+        post.setText(putPostRequest.getText());
         post.setTitle(putPostRequest.getTitle());
         post.setActive(putPostRequest.getActive());
         long currentTime = Instant.now().toEpochMilli();
@@ -279,7 +275,6 @@ public class PostService {
         }
         Integer userId = authService.getUserId();
         Integer postId = commentRequest.getPost_id();
-        System.out.println("postId="+postId); /////
         PostComment postComment = new PostComment();
         if (commentRequest.getText().length() < 10 || commentRequest.getText().length() > 300) {
             result = false;
