@@ -162,14 +162,13 @@ public class Post implements Serializable {
     }
 
     public String getAnnounce() {
-        if(getText() == null){
+        String text = getText();
+        if( text == null){
             return "";
         }
 
-        String announce = getText().replaceAll("[\\p{P}\\p{S}]", "");
-
-        announce = Jsoup.parse(announce).text().substring(0, Math.min(150, announce.length())) + "...";
-
+        String announce = text.replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", "");
+        announce = announce.substring(0, Math.min(150, announce.length())) + "...";
         return announce;
     }
 
