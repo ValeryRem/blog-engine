@@ -28,7 +28,7 @@ public class Post implements Serializable {
     @Column(name = "moderator_id")
     Integer moderatorId;
 
-    @Column(name = "user_id")//, updatable = false, insertable = false)
+    @Column(name = "user_id")
     Integer userId;
 
     Timestamp timestamp;
@@ -161,17 +161,13 @@ public class Post implements Serializable {
     }
 
     public String getAnnounce() {
-        String announce = getText().replaceAll("[\\p{P}\\p{S}]", "");
-        try {
-            if (announce.length() <= 500) {
-                announce = announce.substring(0,
-                        text.length() / 5); // В анонс выводим 20% текста поста, но не более 100 знаков
-            } else {
-                announce = announce.substring(0, 100);
-            }
-        } catch (NullPointerException ex) {
-            announce = "No text of post!";
+        if(getText() == null){
+            return "";
         }
+
+        String announce = getText().replaceAll("[\\p{P}\\p{S}]", "");
+        announce = announce.substring(0, Math.min(150, announce.length())) + "...";
+
         return announce;
     }
 

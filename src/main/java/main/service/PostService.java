@@ -5,15 +5,12 @@ import main.response.ErrorsResponse;
 import main.response.ResultResponse;
 import main.entity.*;
 import main.repository.*;
-import org.jsoup.Jsoup;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -299,8 +296,7 @@ public class PostService {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    public String cleanedOffHtml(String input) {
-        return Jsoup.parse(input).text();
-    }
-
+//    public String cleanedOffHtml(String input) {
+//        return Jsoup.parse(input).text();
+//    }
 }
