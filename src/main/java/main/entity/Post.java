@@ -3,6 +3,7 @@ package main.entity;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Where;
+import org.jsoup.Jsoup;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -166,7 +167,8 @@ public class Post implements Serializable {
         }
 
         String announce = getText().replaceAll("[\\p{P}\\p{S}]", "");
-        announce = announce.substring(0, Math.min(150, announce.length())) + "...";
+
+        announce = Jsoup.parse(announce).text().substring(0, Math.min(150, announce.length())) + "...";
 
         return announce;
     }
