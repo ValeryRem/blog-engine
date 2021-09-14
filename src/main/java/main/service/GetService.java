@@ -483,7 +483,7 @@ public class GetService {
         Map<String, Object> responseMap = new LinkedHashMap<>();
         Map<String, Integer> posts = new LinkedHashMap<>();
         int postCountAtDate;
-        List<Post> postsList = postRepository.findAllActivePosts().stream()
+        List<Post> postsList = postRepository.findAll().stream() // instead of .findAllActivePosts ()
                 .sorted(Comparator.comparing(Post::getTimestamp))
                 .collect(Collectors.toList());
         years = postsList.stream()

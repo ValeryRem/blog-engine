@@ -162,12 +162,12 @@ public class Post implements Serializable {
     }
 
     public String getAnnounce() {
-        String text = getText();
-        if( text == null){
+        String postText = getText();
+        if( postText == null){
             return "";
         }
 
-        String announce = text.replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", "");
+        String announce = postText.replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", "");
         announce = announce.substring(0, Math.min(150, announce.length())) + "...";
         return announce;
     }
