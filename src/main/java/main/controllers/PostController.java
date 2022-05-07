@@ -1,14 +1,10 @@
 package main.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import main.repository.PostRepository;
-import main.repository.SessionRepository;
-import main.repository.UserRepository;
-import main.requests.*;
-import main.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
+import main.model.repository.PostRepository;
+import main.model.repository.SessionRepository;
+import main.model.repository.UserRepository;
+import main.view.requests.*;
+import main.view.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})

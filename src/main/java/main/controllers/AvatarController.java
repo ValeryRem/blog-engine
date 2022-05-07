@@ -1,12 +1,9 @@
 package main.controllers;
 
-import main.service.GetService;
+import main.view.service.GetService;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
 
 @RestController

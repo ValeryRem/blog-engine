@@ -1,6 +1,6 @@
 package main.controllers;
 
-import main.service.AuthService;
+import main.view.service.AuthService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;

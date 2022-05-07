@@ -1,7 +1,7 @@
 package main.controllers;
 
-import main.requests.ProfileRequest;
-import main.service.UserService;
+import main.view.requests.ProfileRequest;
+import main.view.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

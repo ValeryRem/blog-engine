@@ -1,15 +1,12 @@
 package main.controllers;
 
-import main.response.InitResponse;
-import main.requests.CommentRequest;
-import main.requests.PostModerationRequest;
-import main.service.*;
+import main.view.response.InitResponse;
+import main.view.requests.CommentRequest;
+import main.view.requests.PostModerationRequest;
+import main.view.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
