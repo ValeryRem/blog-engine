@@ -20,9 +20,7 @@ public class EmailController {
 
     @RequestMapping("/send")
     public String send() {
-// адрес который увидит получатель в поле ОТ:
         String from = "remenyuk.valery@yandex.ru";
-// адрес получателя, куда отправляем письмо (email пользователя)
         String to = "remenyuk79@gmail.com";
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);

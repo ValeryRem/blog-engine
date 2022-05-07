@@ -20,6 +20,9 @@ public class UserService {
     private final AuthService authService;
     private final  UserRepository userRepository;
 
+    private final int PW_MIN_LENGTH = 6;
+    private final int PW_MAX_LENGTH = 30;
+
     public UserService(AuthService authService, UserRepository userRepository) {
         this.authService = authService;
         this.userRepository = userRepository;
@@ -53,7 +56,7 @@ public class UserService {
                 if (removePhoto.equals("1")) {
                     currentUser.setPhoto("");
                 } else {
-                    File convertFile = saveImage(photo); //аватара форматируется и записывается в папку upload
+                    File convertFile = saveImage(photo);
                     String photoDestination = StringUtils.cleanPath(convertFile.getPath());
                     currentUser.setPhoto("/" + photoDestination);
                     System.out.println("avatarAddress: " + photoDestination);
@@ -64,8 +67,6 @@ public class UserService {
             }
         }
         if (password != null) {
-            int PW_MIN_LENGTH = 6;
-            int PW_MAX_LENGTH = 30;
             if (password.length() < PW_MIN_LENGTH && password.length() > PW_MAX_LENGTH) {
                 result = false;
                 errors.put("password", "Длина пароля с ошибкой");

@@ -14,22 +14,22 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
-  @Query ("SELECT p FROM Post p ORDER BY p.timestamp DESC")
+  @Query ("FROM Post p ORDER BY p.timestamp DESC")
   Page<Post> getRecentPosts (PageRequest pageRequest);
 
-  @Query ("SELECT p FROM Post p ORDER BY SIZE(p.postComments) DESC")
+  @Query ("FROM Post p ORDER BY SIZE(p.postComments) DESC")
   Page<Post> getPopularPosts(PageRequest pageRequest);
 
-  @Query("SELECT p FROM Post p WHERE p.isActive = 1 ORDER BY p.postLikes.size DESC")
+  @Query("FROM Post p WHERE p.isActive = 1 ORDER BY p.postLikes.size DESC")
   Page<Post> getBestPosts(PageRequest pageRequest);
 
-  @Query ("SELECT p FROM Post p ORDER BY p.timestamp")
+  @Query ("FROM Post p ORDER BY p.timestamp")
   Page<Post> getEarlyPosts(PageRequest pageRequest);
 
-  @Query("SELECT p FROM Post p WHERE p.isActive = 1 AND p.moderationStatus = 'ACCEPTED'")
+  @Query("FROM Post p WHERE p.isActive = 1 AND p.moderationStatus = 'ACCEPTED'")
   Collection<Post> findAllActivePosts ();
 
-  @Query("SELECT p FROM Post p WHERE p.userId = ?1")
+  @Query("FROM Post p WHERE p.userId = ?1")
   Collection<Post> findAllPostsByUserId (int userId);
 
   List<Post> findByTextContaining(String text);
