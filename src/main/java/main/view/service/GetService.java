@@ -70,7 +70,7 @@ public class GetService {
                    userMap.put("name", user.getName());
             responseMap.put("user", userMap);
             responseMap.put("title", post.getTitle());
-            responseMap.put("announce", post.getAnnounce());
+            responseMap.put("announce", post.getAnnounce().replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", ""));
             responseMap.put("likeCount", extractLikeCount(post));
             responseMap.put("dislikeCount", extractDislikeCount(post));
             responseMap.put("commentCount", commentRepository.getCommentCountByPostId(post.getPostId()));
@@ -292,7 +292,7 @@ public class GetService {
 
             if (!tagsIdList.isEmpty()) {
                 tagNames = tagsIdList.stream()
-                        .map(t -> tagRepository.getOne(t).getTagName())
+                        .map(t -> tagRepository.getOne(t).getName())
                         .collect(Collectors.toList());
             }
             responseMap.put("tags", tagNames);
@@ -373,7 +373,7 @@ public class GetService {
 
     public ResponseEntity<?> getTag() {
         List<Tag> tags = tagRepository.findAll();
-        List<String> tagNames = tags.stream().map(Tag::getTagName).collect(Collectors.toList());
+        List<String> tagNames = tags.stream().map(Tag::getName).collect(Collectors.toList());
         Map<String, List<TagResponse>> tagsMap = getTagResponsesMap(tagNames);
         return new ResponseEntity<>(tagsMap, HttpStatus.OK);
     }

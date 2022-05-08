@@ -146,8 +146,8 @@ public class PostService {
         post.setModeratorId(moderatorId);
         post.setUserId(userId);
         post.setViewCount(0);
-        post.setTitle(postRequest.getTitle());
-        post.setText(postRequest.getText().replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", ""));
+        post.setTitle(postRequest.getTitle().replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", ""));
+        post.setText(postRequest.getText());//.replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", ""));
         if (globalSettingsRepository.findAll().stream().findAny().orElse(new GlobalSettings())
                 .isPostPremoderation()) {
             if (!user.getIsModerator() || postRequest.getActive() != 1) { // if the user is not moderator
@@ -197,7 +197,7 @@ public class PostService {
         post.setModerationStatus(ModerationStatus.ACCEPTED);
         for (String tag : tags) {
             if (!tagRepository.findAll().stream()
-                    .map(Tag::getTagName)
+                    .map(Tag::getName)
                     .collect(Collectors.toList())
                     .contains(tag)) {
                 if (title.contains(tag) || text.contains(tag)) {

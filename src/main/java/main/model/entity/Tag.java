@@ -9,14 +9,14 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "tag_name")
-    private String tagName;
+    @Column(name = "name")
+    private String name;
 
     public Tag() {
     }
 
-    public Tag(String tagName) {
-        this.tagName = tagName;
+    public Tag(String name) {
+        this.name = name;
     }
 
     public Integer getId() {
@@ -27,15 +27,15 @@ public class Tag {
         this.id = id;
     }
 
-    public String getTagName() {
-        return tagName;
+    public String getName() {
+        return name;
     }
 
-    public void setTagName(String tagName) {
-        if(tagName.matches("#\\S+")) {
-            this.tagName = tagName;
+    public void setName(String name) {
+        if(name.matches("#\\S+")) {
+            this.name = name;
         } else {
-            this.tagName = "";
+            this.name = "";
         }
     }
 }
