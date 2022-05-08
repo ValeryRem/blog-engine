@@ -202,9 +202,9 @@ public class PostService {
                     .contains(tag)) {
                 if (title.contains(tag) || text.contains(tag)) {
                     Tag tagNew = new Tag(tag);
-                    tagRepository.save(tagNew);
+                    tagRepository.saveAndFlush(tagNew);
                     Tag2Post tag2Post = new Tag2Post(post.getPostId(), tagNew.getId());
-                    tag2PostRepository.save(tag2Post);
+                    tag2PostRepository.saveAndFlush(tag2Post);
                 }
             }
         }
@@ -286,7 +286,7 @@ public class PostService {
             postComment.setText(commentRequest.getText());
             postComment.setTime(Timestamp.valueOf(now()));
             postComment.setUserId(userId);
-            commentRepository.save(postComment);
+            commentRepository.saveAndFlush(postComment);
             map.put("id", postComment.getCommentId());
         } else {
             map.put("result", new ResultResponse(false));
