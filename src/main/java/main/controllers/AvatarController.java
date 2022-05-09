@@ -5,7 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-
+// искусственный коммит 9.5.22
 @RestController
 @RequestMapping("/{folder}/{dir1}/{dir2}/{dir3}/{filename}")
 public class AvatarController {

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.time.LocalDateTime.now;
-
+// искусственный коммит 9.5.22
 @Service
 public class PostService {
 

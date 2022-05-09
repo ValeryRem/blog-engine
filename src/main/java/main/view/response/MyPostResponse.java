@@ -3,7 +3,7 @@ package main.view.response;
 import main.model.entity.Post;
 
 import java.util.TreeMap;
-
+// искусственный коммит 9.5.22
 public class MyPostResponse {
     private final Integer id;
     private final long timestamp;

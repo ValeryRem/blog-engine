@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
-
+// искусственный коммит 9.5.22
 @SpringBootApplication
 public class ApplicationMain {
 

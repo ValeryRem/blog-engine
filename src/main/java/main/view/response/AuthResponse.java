@@ -1,7 +1,7 @@
 package main.view.response;
 
 import java.util.LinkedHashMap;
-
+// искусственный коммит 9.5.22
 
 public class AuthResponse {
     private boolean result  ;

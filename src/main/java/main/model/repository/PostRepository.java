@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
-
+// искусственный коммит 9.5.22
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
   @Query ("FROM Post p ORDER BY p.timestamp DESC")

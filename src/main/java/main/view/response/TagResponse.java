@@ -1,5 +1,5 @@
 package main.view.response;
-
+// искусственный коммит 9.5.22
 public class TagResponse {
     private final String name;
     private final double weight;

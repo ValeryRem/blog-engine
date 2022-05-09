@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
-
+// искусственный коммит 9.5.22
 @Entity
 @Table(name = "posts")
 public class Post implements Serializable {

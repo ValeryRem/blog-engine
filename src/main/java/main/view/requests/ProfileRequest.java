@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
-
+// искусственный коммит 9.5.22
 @Service
 public class ProfileRequest implements Serializable {
     @Nullable

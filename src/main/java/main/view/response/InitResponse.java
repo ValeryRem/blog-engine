@@ -2,7 +2,7 @@ package main.view.response;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
+// искусственный коммит 9.5.22
 @Component
 public class InitResponse {
     @Value("${blog.title}")

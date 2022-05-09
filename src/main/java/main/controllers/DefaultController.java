@@ -4,7 +4,7 @@ import main.view.response.InitResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+// искусственный коммит 9.5.22
 @Controller
 @RequestMapping("/")
 public class DefaultController {

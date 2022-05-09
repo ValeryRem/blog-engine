@@ -25,7 +25,7 @@ import java.time.*;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
-
+// искусственный коммит 9.5.22
 @Service
 public class AuthService{
     private final UserRepository userRepository;

@@ -14,7 +14,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+// искусственный коммит 9.5.22
 @Service
 public class UserService {
     private final AuthService authService;

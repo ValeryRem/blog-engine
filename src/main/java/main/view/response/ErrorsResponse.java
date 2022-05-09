@@ -2,7 +2,7 @@ package main.view.response;
 import java.util.Map;
 
 public class ErrorsResponse {
-
+    // искусственный коммит 9.5.22
     private Map<String, String> errors;
 
     public ErrorsResponse() {

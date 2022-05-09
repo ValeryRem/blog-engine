@@ -1,7 +1,7 @@
 package main.model.entity;
 
 import javax.persistence.*;
-
+// искусственный коммит 9.5.22
 @Entity
 @Table(name = "tag_2_post")
 public class Tag2Post {

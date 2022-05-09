@@ -1,5 +1,5 @@
 package main.view.response;
-
+// искусственный коммит 9.5.22
 public class ModerationResponse {
     private Integer id;
     private  String decision;

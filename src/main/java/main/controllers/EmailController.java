@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-
+// искусственный коммит 9.5.22
 @RestController
 public class EmailController {
     private final JavaMailSender mailSender;

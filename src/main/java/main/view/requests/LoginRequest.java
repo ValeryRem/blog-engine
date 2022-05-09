@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-
+// искусственный коммит 9.5.22
 @Service
 public class LoginRequest implements Serializable {
     @JsonProperty("e_mail")

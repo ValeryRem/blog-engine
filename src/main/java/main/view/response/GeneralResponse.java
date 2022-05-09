@@ -2,7 +2,7 @@ package main.view.response;
 
 import java.util.List;
 import java.util.Map;
-
+// искусственный коммит 9.5.22
 public class GeneralResponse {
     private int count;
     private List<Map<String, Object>> posts;

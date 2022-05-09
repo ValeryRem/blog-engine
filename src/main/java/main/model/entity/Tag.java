@@ -11,7 +11,7 @@ public class Tag {
 
     @Column(name = "name")
     private String name;
-
+    // искусственный коммит 9.5.22
     public Tag() {
     }
 

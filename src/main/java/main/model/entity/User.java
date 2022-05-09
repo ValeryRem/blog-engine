@@ -6,7 +6,7 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.sql.Timestamp;
-
+// искусственный коммит 9.5.22
 @Entity
 @Table(name = "users")
 public class User {

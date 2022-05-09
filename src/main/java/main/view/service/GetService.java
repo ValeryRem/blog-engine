@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
-
+// искусственный коммит 9.5.22
 @Service
 public class GetService {
 

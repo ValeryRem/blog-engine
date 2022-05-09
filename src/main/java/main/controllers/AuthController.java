@@ -5,7 +5,7 @@ import main.view.service.AuthService;
 import main.view.requests.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+// искусственный коммит 9.5.22
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

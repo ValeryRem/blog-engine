@@ -1,7 +1,7 @@
 package main.view.response;
 
 import java.util.List;
-
+// искусственный коммит 9.5.22
 public class PostByIdResponse {
     private Integer id;
     private long timestamp;

@@ -1,7 +1,7 @@
 package main.view.response;
 
 import main.model.entity.Post;
-
+// искусственный коммит 9.5.22
 public class UserResponse {
     private Integer id;
     private String name;

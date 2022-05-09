@@ -2,7 +2,7 @@ package main.model.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-
+// искусственный коммит 9.5.22
 @Entity
 @Table(name = "post_comments")
 public class PostComment {

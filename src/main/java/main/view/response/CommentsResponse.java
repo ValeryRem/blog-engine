@@ -1,7 +1,7 @@
 package main.view.response;
 
 import java.sql.Timestamp;
-
+// искусственный коммит 9.5.22
 public class CommentsResponse {
     private Integer id;
     private Timestamp timestamp;

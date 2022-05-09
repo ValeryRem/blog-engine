@@ -3,8 +3,7 @@ package main.model.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
-
-@Entity
+// искусственный коммит 9.5.22Entity
 @Table(name = "captcha_codes")
 public class CaptchaCode {
     @Id

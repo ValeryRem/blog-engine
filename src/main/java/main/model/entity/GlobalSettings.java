@@ -2,7 +2,7 @@ package main.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
-
+// искусственный коммит 9.5.22
 @Entity
 public class GlobalSettings {
     @Id

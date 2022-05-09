@@ -3,7 +3,7 @@ package main.view.requests;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-
+// искусственный коммит 9.5.22
 @Service
 public class CommentRequest implements Serializable {
     Integer parent_id;

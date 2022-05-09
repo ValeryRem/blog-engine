@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
-
+// искусственный коммит 9.5.22
 @Service
 public class PutPostRequest implements Serializable {
     private Long timestamp;
