@@ -160,7 +160,7 @@ public class PostService {
             post.setModerationStatus(ModerationStatus.ACCEPTED);
         }
 
-        postRepository.save(post);
+        postRepository.saveAndFlush(post);
         processTags(postRequest.getTags(), post, postRequest.getTitle(), postRequest.getText());
         return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
     }
@@ -279,8 +279,9 @@ public class PostService {
         if (result) {
             if (commentRequest.getParent_id() != null) {
                 postComment.setParent_id(commentRequest.getParent_id());
+            } else {
+                postComment.setParent_id(null);
             }
-
             postComment.setPost_id(postId);
             postComment.setPost(postRepository.getOne(postId));
             postComment.setText(commentRequest.getText());

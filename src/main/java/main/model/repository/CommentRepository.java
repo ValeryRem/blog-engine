@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-// искусственный коммит 9.5.22
 @Repository
 public interface CommentRepository extends JpaRepository<PostComment, Integer> {
         @Query("FROM PostComment pc WHERE pc.post_id = ?1")

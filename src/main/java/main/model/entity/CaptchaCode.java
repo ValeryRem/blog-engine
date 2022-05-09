@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 // искусственный коммит 9.5.22Entity
+@Entity
 @Table(name = "captcha_codes")
 public class CaptchaCode {
     @Id
@@ -11,10 +12,11 @@ public class CaptchaCode {
     private Integer id;
 
     @NotBlank(message = "Captcha code is mandatory")
+
     private String code;
 
     @NotBlank(message = "Secret code is mandatory")
-    @Column(name = "captcha_secret")
+    @Column(name = "secret_code")
     private String secretCode;
 
     private Timestamp timestamp;

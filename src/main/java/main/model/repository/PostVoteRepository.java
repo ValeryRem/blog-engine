@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Optional;
-// искусственный коммит 9.5.22
 @Repository
 public interface PostVoteRepository extends JpaRepository<PostVote, Integer> {
     @Query("FROM PostVote pv WHERE pv.userId = ?1")
