@@ -159,9 +159,8 @@ public class PostService {
         } else {
             post.setModerationStatus(ModerationStatus.ACCEPTED);
         }
-
-        postRepository.saveAndFlush(post);
         processTags(postRequest.getTags(), post, postRequest.getTitle(), postRequest.getText());
+        postRepository.saveAndFlush(post);
         return new ResponseEntity<>(new ResultResponse(true), HttpStatus.OK);
     }
 
@@ -202,9 +201,9 @@ public class PostService {
                     .contains(tag)) {
                 if (title.contains(tag) || text.contains(tag)) {
                     Tag tagNew = new Tag(tag);
-                    tagRepository.saveAndFlush(tagNew);
+                    tagRepository.save(tagNew);
                     Tag2Post tag2Post = new Tag2Post(post.getPostId(), tagNew.getId());
-                    tag2PostRepository.saveAndFlush(tag2Post);
+                    tag2PostRepository.save(tag2Post);
                 }
             }
         }
@@ -279,15 +278,13 @@ public class PostService {
         if (result) {
             if (commentRequest.getParent_id() != null) {
                 postComment.setParent_id(commentRequest.getParent_id());
-            } else {
-                postComment.setParent_id(null);
             }
             postComment.setPost_id(postId);
             postComment.setPost(postRepository.getOne(postId));
             postComment.setText(commentRequest.getText());
             postComment.setTime(Timestamp.valueOf(now()));
             postComment.setUserId(userId);
-            commentRepository.saveAndFlush(postComment);
+            commentRepository.save(postComment);
             map.put("id", postComment.getCommentId());
         } else {
             map.put("result", new ResultResponse(false));

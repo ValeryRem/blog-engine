@@ -68,7 +68,7 @@ public class PostController {
 
     @GetMapping("/post/byTag")
     public ResponseEntity<?> getPostsByTag(@RequestParam(defaultValue="0") Integer offset,
-                                            @RequestParam(defaultValue="10") Integer limit,
+                                            @RequestParam(defaultValue="12") Integer limit,
                                             @RequestParam String tag){
         System.out.println("Method getPostsByTag uses tag name:" + tag);
         return getService.getPostsByTag(offset, limit, tag);

@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface TagRepository extends JpaRepository <Tag, Integer>  {
     @Query(value = "FROM Tag t WHERE t.name = ?1")
-    Optional<Tag> findTagByName(String tagName);
+    Optional<Tag> findTagByName(String name);
 }

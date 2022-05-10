@@ -66,11 +66,11 @@ public class GetService {
             int userId = post.getUserId();
             User user = userRepository.getOne(userId);
             Map<String, Object> userMap = new LinkedHashMap<>();
-                   userMap.put("id", userId);
-                   userMap.put("name", user.getName());
+            userMap.put("id", userId);
+            userMap.put("name", user.getName());
             responseMap.put("user", userMap);
             responseMap.put("title", post.getTitle());
-            responseMap.put("announce", post.getAnnounce().replaceAll("<(.*?)>","" ).replaceAll("[\\p{P}\\p{S}]", ""));
+            responseMap.put("announce", post.getAnnounce().replaceAll("<(.*?)>", "").replaceAll("[\\p{P}\\p{S}]", ""));
             responseMap.put("likeCount", extractLikeCount(post));
             responseMap.put("dislikeCount", extractDislikeCount(post));
             responseMap.put("commentCount", commentRepository.getCommentCountByPostId(post.getPostId()));
@@ -86,7 +86,7 @@ public class GetService {
 
     private List<Post> getOrderedPosts(Integer offset, Integer limit, String mode) {
         Page<Post> posts;
-        PageRequest pageRequest = PageRequest.of(offset/limit, limit);
+        PageRequest pageRequest = PageRequest.of(offset / limit, limit);
         switch (mode) {
             case "popular":
                 posts = postRepository.getPopularPosts(pageRequest);
@@ -113,7 +113,7 @@ public class GetService {
         List<Map<String, Object>> postMapList = new ArrayList<>();
         List<Post> posts = postRepository.findByTextContaining(query.trim());
         int count = posts.size();
-        if(count == 0) {
+        if (count == 0) {
             return new ResponseEntity<>("No posts with this text!", HttpStatus.NOT_FOUND);
         }
 
@@ -176,6 +176,7 @@ public class GetService {
             responseEntity = new ResponseEntity<>("No tag " + tagName + " is registered.",
                     HttpStatus.NO_CONTENT);
         } else {
+//            responseEntity =  getPostsBySearch(offset, limit, tagName);
             Tag tag = tagOptional.get();
             int tagId = tag.getId();
             List<Post> posts = new ArrayList<>();
@@ -197,9 +198,11 @@ public class GetService {
             generalResponse.setPosts(getOffsetLimitOutput(postMapList, offset, limit));
             responseEntity = new ResponseEntity<>(generalResponse, HttpStatus.OK);
         }
-
+//
         return responseEntity;
     }
+
+
 
     public ResponseEntity<?> getMyPosts(Integer offset, Integer limit) {
         if (offset > limit) {
@@ -370,7 +373,7 @@ public class GetService {
         }
         return new ResponseEntity<>(tagsResponseMap, HttpStatus.OK);
     }
-
+//
     public ResponseEntity<?> getTag() {
         List<Tag> tags = tagRepository.findAll();
         List<String> tagNames = tags.stream().map(Tag::getName).collect(Collectors.toList());
