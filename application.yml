@@ -1,4 +1,6 @@
-spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-01.cleardb.com/heroku_b55c59d1f40106f?useUnicode=true&characterEncoding=utf-8&reconnect=true}
+#spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-01.cleardb.com/heroku_b55c59d1f40106f?useUnicode=true&characterEncoding=utf-8&reconnect=true}
+
+spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-01.cleardb.com/heroku_9bc1beca?useUnicode=true&characterEncoding=utf-8&reconnect=true}
 spring.datasource.username: remenyuk79@gmail.com
 spring.datasource.password: #Dolby?22Credit#7
 
