@@ -1,4 +1,4 @@
-package main.view.response;
+package main.response;
 import java.util.Map;
 
 public class ErrorsResponse {

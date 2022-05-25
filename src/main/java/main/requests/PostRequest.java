@@ -1,4 +1,4 @@
-package main.view.requests;
+package main.requests;
 
 import org.springframework.stereotype.Service;
 
@@ -6,21 +6,18 @@ import java.io.Serializable;
 import java.util.List;
 // искусственный коммит 9.5.22
 @Service
-public class PutPostRequest implements Serializable {
-    private Long timestamp;
+public class PostRequest implements Serializable {
+    private long timestamp;
     private Integer active;
     private String title;
     private List<String> tags;
     private String text;
 
-//    public PutPostRequest() {
-//    }
-
-    public Long getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 

@@ -1,4 +1,4 @@
-package main.view.response;
+package main.response;
 // искусственный коммит 9.5.22
 public class TagResponse {
     private final String name;

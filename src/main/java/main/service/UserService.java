@@ -1,6 +1,6 @@
-package main.view.service;
+package main.service;
 
-import main.view.response.ResultResponse;
+import main.response.ResultResponse;
 import main.model.entity.User;
 import main.model.repository.UserRepository;
 import org.springframework.http.*;

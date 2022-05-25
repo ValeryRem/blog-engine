@@ -1,6 +1,6 @@
 package main.controllers;
 
-import main.view.service.AuthService;
+import main.service.AuthService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +29,5 @@ public class EmailController {
         message.setText("Воу! А это текст письма! Это просто текст, без оформления и HTML!");
         mailSender.send(message);
 
-        return "Письмо отправлено в " + LocalDateTime.now().toString();    }
+        return "Письмо отправлено в " + LocalDateTime.now();    }
 }

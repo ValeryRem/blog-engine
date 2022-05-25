@@ -1,8 +1,8 @@
 package main.controllers;
 
-import main.view.requests.RestoreRequest;
-import main.view.service.AuthService;
-import main.view.requests.LoginRequest;
+import main.requests.RestoreRequest;
+import main.service.AuthService;
+import main.requests.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 // искусственный коммит 9.5.22

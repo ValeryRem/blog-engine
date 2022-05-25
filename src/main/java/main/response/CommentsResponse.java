@@ -1,4 +1,4 @@
-package main.view.response;
+package main.response;
 
 import java.sql.Timestamp;
 // искусственный коммит 9.5.22

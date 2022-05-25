@@ -1,4 +1,4 @@
-package main.view.requests;
+package main.requests;
 
 import java.io.Serializable;
 // искусственный коммит 9.5.22

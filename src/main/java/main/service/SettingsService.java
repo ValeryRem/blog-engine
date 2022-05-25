@@ -1,6 +1,6 @@
-package main.view.service;
+package main.service;
 
-import main.view.response.ResultResponse;
+import main.response.ResultResponse;
 import main.model.entity.GlobalSettings;
 import main.model.repository.GlobalSettingsRepository;
 import main.model.repository.UserRepository;

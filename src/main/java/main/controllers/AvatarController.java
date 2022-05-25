@@ -1,6 +1,6 @@
 package main.controllers;
 
-import main.view.service.GetService;
+import main.service.GetService;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 

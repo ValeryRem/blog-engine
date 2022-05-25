@@ -1,10 +1,10 @@
-package main.view.service;
+package main.service;
 
 import main.model.entity.*;
 import main.model.repository.*;
-import main.view.requests.*;
-import main.view.response.ErrorsResponse;
-import main.view.response.ResultResponse;
+import main.requests.*;
+import main.response.ErrorsResponse;
+import main.response.ResultResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

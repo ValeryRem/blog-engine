@@ -1,4 +1,4 @@
-package main.view.requests;
+package main.requests;
 
 import org.springframework.stereotype.Service;
 

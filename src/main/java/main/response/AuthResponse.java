@@ -1,4 +1,4 @@
-package main.view.response;
+package main.response;
 
 import java.util.LinkedHashMap;
 // искусственный коммит 9.5.22

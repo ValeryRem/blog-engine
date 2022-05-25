@@ -1,4 +1,4 @@
-package main.view.service;
+package main.service;
 
 import com.github.cage.Cage;
 import com.github.cage.GCage;
@@ -6,9 +6,9 @@ import main.model.entity.CaptchaCode;
 import main.model.entity.GlobalSettings;
 import main.model.entity.User;
 import main.model.repository.*;
-import main.view.requests.LoginRequest;
-import main.view.response.AuthResponse;
-import main.view.response.ResultResponse;
+import main.requests.LoginRequest;
+import main.response.AuthResponse;
+import main.response.ResultResponse;
 import main.model.entity.Session;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpStatus;

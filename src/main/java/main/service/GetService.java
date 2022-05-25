@@ -1,10 +1,10 @@
-package main.view.service;
+package main.service;
 
 import main.model.entity.*;
 import main.model.repository.*;
-import main.view.response.GeneralResponse;
-import main.view.response.TagResponse;
-import main.view.response.UserResponse;
+import main.response.GeneralResponse;
+import main.response.TagResponse;
+import main.response.UserResponse;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,4 +1,4 @@
-package main.view.response;
+package main.response;
 
 import main.model.entity.Post;
 // искусственный коммит 9.5.22

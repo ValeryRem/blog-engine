@@ -1,4 +1,4 @@
-package main.view.response;
+package main.response;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package main.controllers;
 
-import main.view.response.InitResponse;
-import main.view.requests.CommentRequest;
-import main.view.requests.PostModerationRequest;
-import main.view.service.*;
+import main.response.InitResponse;
+import main.requests.CommentRequest;
+import main.requests.PostModerationRequest;
+import main.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

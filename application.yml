@@ -1,18 +1,14 @@
-#spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-01.cleardb.com/heroku_b55c59d1f40106f?useUnicode=true&characterEncoding=utf-8&reconnect=true}
-
-#spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-01.cleardb.com/heroku_9bc1beca?useUnicode=true&characterEncoding=utf-8&reconnect=true}
-#spring.datasource.username: remenyuk79@gmail.com
-#spring.datasource.password: #Dolby?22Credit#7
-
 # Heroku было в 2021 г:
+#spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-01.cleardb.com/heroku_b55c59d1f40106f?useUnicode=true&characterEncoding=utf-8&reconnect=true}
 #spring.datasource.username: bc2bf3eba93a08
 #spring.datasource.password: 7f074a44
 
-# Locally:
-#spring.datasource.url: jdbc:mysql://localhost:3306/blogsj?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+# Locally now:
+#spring.datasource.url: jdbc:mysql://localhost:3306/blogsj?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&reconnect=true
 #spring.datasource.username: root
 #spring.datasource.password: valery_56
 
+# Heroku now:
 spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-02.cleardb.net/heroku_6f679cbae2fbc38?useUnicode=true&characterEncoding=utf-8&reconnect=true
 spring.datasource.username: b6538a6bf58f47
 spring.datasource.password: e50e23af
@@ -20,7 +16,6 @@ spring.datasource.password: e50e23af
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 spring.jpa.database-platform: org.hibernate.dialect.MySQL8Dialect
 spring.jpa.hibernate.ddl-auto: validate
-#spring.jpa.generate-ddl: true
 spring.jpa.show-sql: false
 
 blog.title: Developers Stories
@@ -49,5 +44,4 @@ spring.servlet.multipart.max-file-size: 5MB
 spring.servlet.multipart.max-request-size: 5MB
 
 server.port: ${PORT:8080}
-#  port: 8080
 
