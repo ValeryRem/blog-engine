@@ -3,11 +3,12 @@
 
 # __Deployment__
 	The project is deployed at Heroku platform for public consideration:
-https://dashboard.heroku.com/pipelines/64dc65df-8670-4fd0-9b28-b9efcb141b61.
+https://blog-engine-22.herokuapp.com/
 
 # __Libraries__
-__JDK 1.8,__ 
-__Maven,__
-__Spring Boot,__
-__Junit__
-
+- JDK 1.8
+- Maven
+- Spring Boot
+- Spring Security
+- Junit
+- Postgres
