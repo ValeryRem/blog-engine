@@ -10,8 +10,8 @@
 
 # Heroku now:
 spring.datasource.url: jdbc:${CLEARDB_DATABASE_URL:eu-cdbr-west-02.cleardb.net/heroku_6f679cbae2fbc38?useUnicode=true&characterEncoding=utf-8&reconnect=true
-spring.datasource.username: b6538a6bf58f47
-spring.datasource.password: e50e23af
+spring.datasource.username: ${b6538a6bf58f47}
+spring.datasource.password: ${e50e23af}
 
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 spring.jpa.database-platform: org.hibernate.dialect.MySQL8Dialect
